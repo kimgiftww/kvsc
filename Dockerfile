@@ -16,9 +16,6 @@ RUN curl https://rclone.org/install.sh | sudo bash
 # Copy rclone tasks to /tmp, to potentially be used
 COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
 
-# Fix permissions for code-server
-RUN sudo chown -R coder:coder /home/coder/.local
-RUN sudo chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
 # You can add custom software and dependencies for your environment below
 # -----------
 
@@ -35,8 +32,12 @@ RUN sudo apt install python3-pip
 
 # -----------
 
+# Fix permissions for code-server
+RUN sudo chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+RUN sudo chown -R coder:coder /home/coder/.local
+
 # Port
-ENV PORT=8080
+ENV PORT=8888
 
 # Use our custom entrypoint script first
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
