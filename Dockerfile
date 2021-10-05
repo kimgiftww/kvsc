@@ -4,9 +4,6 @@ FROM codercom/code-server:3.12.0
 USER coder
 RUN sudo usermod -aG sudo coder
 
-# Fix permissions for code-server
-RUN sudo chown -R coder:coder /home/coder/.local
-
 # Apply VS Code settings
 COPY deploy-container/settings.json .local/share/code-server/User/settings.json
 
@@ -19,6 +16,9 @@ RUN curl https://rclone.org/install.sh | sudo bash
 
 # Copy rclone tasks to /tmp, to potentially be used
 COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
+
+# Fix permissions for code-server
+RUN sudo chown -R coder:coder /home/coder/.local
 
 # You can add custom software and dependencies for your environment below
 # -----------
