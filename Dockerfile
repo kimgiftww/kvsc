@@ -4,6 +4,9 @@ FROM codercom/code-server:3.12.0
 USER coder
 RUN sudo usermod -aG sudo coder
 
+# Fix permissions for code-server
+RUN sudo chown -R coder:coder /home/coder/.local
+
 # Apply VS Code settings
 COPY deploy-container/settings.json .local/share/code-server/User/settings.json
 
@@ -38,7 +41,3 @@ ENV PORT=8888
 # Use our custom entrypoint script first
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
 ENTRYPOINT ["/usr/bin/deploy-container-entrypoint.sh"]
-
-# Fix permissions for code-server
-RUN sudo chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
-RUN sudo chown -R coder:coder /home/coder/.local
