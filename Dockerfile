@@ -2,7 +2,7 @@
 FROM codercom/code-server:3.12.0
 
 USER coder
-sudo usermod -aG sudo coder
+RUN sudo usermod -aG sudo coder
 
 # Apply VS Code settings
 COPY deploy-container/settings.json .local/share/code-server/User/settings.json
