@@ -18,7 +18,7 @@ COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
 
 # Fix permissions for code-server
 RUN sudo chown -R coder:coder /home/coder/.local
-
+RUN sudo chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
 # You can add custom software and dependencies for your environment below
 # -----------
 
@@ -28,6 +28,7 @@ RUN sudo chown -R coder:coder /home/coder/.local
 
 # Install apt packages:
 # RUN sudo apt-get install -y ubuntu-make
+RUN sudo apt install python3-pip
 
 # Copy files: 
 # COPY deploy-container/myTool /home/coder/myTool
