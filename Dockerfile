@@ -1,7 +1,7 @@
 # Start from the code-server Debian base image
 FROM codercom/code-server:3.12.0
 
-COPY requirements.txt $pwd
+COPY r.txt $pwd
 RUN sudo apt-get update && sudo apt-get install unzip python3-pip wget -y
 RUN sudo pip install -r requirements.txt
 RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
