@@ -14,8 +14,8 @@ ENV SHELL=/bin/bash
 RUN sudo apt-get update && sudo apt-get install unzip -y && sudo apt-get install python3-pip -y
 RUN curl https://rclone.org/install.sh | sudo bash
 
-COPY requirements.txt
-RUN sudo pip install -r requirements.txt $pwd
+COPY requirements.txt $pwd
+RUN sudo pip install -r requirements.txt
 
 # Copy rclone tasks to /tmp, to potentially be used
 COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
