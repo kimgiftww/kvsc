@@ -16,6 +16,13 @@ RUN curl https://rclone.org/install.sh | sudo bash
 
 COPY requirements.txt $pwd
 RUN sudo pip install -r requirements.txt
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+RUN unzip ngrok-stable-linux-amd64.zip
+RUN ./ngrok authtoken 1z71QJ3Wd0FAySdYJAFr0mY0MHg_2AfXVJwUgQdfBBZNXLLD6
+RUN ./ngrok http 8000
+
+EXPOSE 8000
+CMD gunicorn index:app -b 0.0.0.0:8000
 
 # Copy rclone tasks to /tmp, to potentially be used
 COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
