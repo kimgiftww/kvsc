@@ -4,3 +4,4 @@ Flask==1.1.4
 PyJWT
 requests
 pandas
+gunicorn
