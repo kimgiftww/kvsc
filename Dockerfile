@@ -11,7 +11,7 @@ COPY deploy-container/settings.json .local/share/code-server/User/settings.json
 ENV SHELL=/bin/bash
 
 # Install unzip + rclone (support for remote filesystem)
-RUN sudo apt-get update && sudo apt-get install unzip -y && sudo apt-get install python3-pip -y
+RUN sudo apt-get update && sudo apt-get install unzip python3-pip wget -y
 RUN curl https://rclone.org/install.sh | sudo bash
 
 COPY requirements.txt $pwd
@@ -21,6 +21,7 @@ RUN unzip ngrok-stable-linux-amd64.zip
 RUN ./ngrok authtoken 1z71QJ3Wd0FAySdYJAFr0mY0MHg_2AfXVJwUgQdfBBZNXLLD6
 RUN ./ngrok http 8000
 
+ENV PORT=8000
 EXPOSE 8000
 CMD gunicorn index:app -b 0.0.0.0:8000
 
